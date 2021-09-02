@@ -1,0 +1,103 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario2_Client"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="using:SDKTemplate"
+    mc:Ignorable="d">
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="12,10,12,12">
+        <StackPanel>
+            <TextBlock Text="TEST:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" Text="Query services from GATT server"/>
+            <TextBlock TextWrapping="Wrap" Margin="0,10,0,0">
+                Connects to the Bluetooth Low Energy device
+                selected in the "Discover GATT Servers" communicates with the device.
+            </TextBlock>
+            <TextBlock Style="{StaticResource ListItemTextStyle}" TextWrapping="Wrap" Margin="0,10,0,0">
+                Selected device: <Run x:Name="SelectedDeviceRun" FontWeight="Bold"/>
+            </TextBlock>
+            <StackPanel Orientation="Horizontal">
+
+                <Button x:Name="ConnectButton" Content="Connect" Click="{x:Bind ConnectButton_Click}" Margin="0,10,0,0"/>
+            <ComboBox x:Name="ServiceList" Margin="0,10,5,0" PlaceholderText="Choose a service" Visibility="Collapsed"
+                      SelectionChanged="{x:Bind ServiceList_SelectionChanged}"/>
+            <ComboBox x:Name="CharacteristicList" Margin="0,10,10,0" PlaceholderText="Choose a characteristic" Visibility="Collapsed"
+                      SelectionChanged="{x:Bind CharacteristicList_SelectionChanged}" />
+                <Button x:Name="CharacteristicReadButton" Content="Read Value" Click="{x:Bind CharacteristicReadButton_Click}"
+                        Visibility="Collapsed" Margin="0,10,10,0"/>
+                <Button x:Name="ValueChangedSubscribeToggle" Content="Subscribe to value changes" Click="{x:Bind ValueChangedSubscribeToggle_Click}"
+                        Visibility="Collapsed" Margin="0,10,10,0"/>
+            </StackPanel>
+            <StackPanel x:Name="CharacteristicWritePanel" Margin="0,10,0,0" Visibility="Collapsed" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+                <TextBox x:Name="CharacteristicWriteValue" PlaceholderText="Enter text/number to send"/>
+                <Button Content="Write Value" Click="{x:Bind CharacteristicWriteButtonInt_Click}" Margin="0,5,0,15"/>
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="Write Value as DateTime(Now)" Click="{x:Bind DateTimeNowBufferWriteButtonInt_Click}" Margin="0,5,5,0"/>
+                    <Button Content="Write Value as DateTime( 20210728 WED 22:34 )" Click="{x:Bind DateTimeBufferWriteButtonInt_Click}" Margin="0,5,5,0" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="Current time weather" Click="{x:Bind WeatherData5BufferWriteButtonInt_Click}" Margin="0,5,5,0"/>
+                    <Button Content="L:Dong, D:1day" Click="{x:Bind WeatherData1BufferWriteButtonInt_Click}" Margin="0,5,5,0"/>
+                    <Button Content="L:Jang-d, D:today" Click="{x:Bind WeatherData2BufferWriteButtonInt_Click}" Margin="0,5,5,0"/>
+                    <Button Content="L:Yangjae-d, D:tomorrow" Click="{x:Bind WeatherData3BufferWriteButtonInt_Click}" Margin="0,5,5,0"/>
+                    <Button Content="L:Cheongnyangni-d, D:tomorrow+1" Click="{x:Bind WeatherData4BufferWriteButtonInt_Click}" Margin="0,5,5,0"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                <TextBox x:Name="UserInfoHeight" PlaceholderText="Height" Margin="0,5,5,0" Width="100" HorizontalAlignment="Left"/>              
+                <TextBox x:Name="UserInfoWeight" PlaceholderText="Weight" Margin="0,5,5,0" Width="100" HorizontalAlignment="Left"/>
+                <ComboBox x:Name="UserInfoGender" Margin="0,5,5,0" PlaceholderText="Gender" Height="32" Width="100">
+                        <ComboBoxItem x:Name="MALE" Margin="0,5,5,0" Content="Male" />
+                        <ComboBoxItem x:Name="FEMALE" Margin="0,5,5,0" Content="Female" />
+                    </ComboBox>
+                <Button Content="UserInfoDataTransfer" Click="{x:Bind UserInfoDataTransferWriteButtonInt_Click}" Margin="0,5,5,0"/>
+                <Button Content="UserInfoDataCheck" Click="{x:Bind UserInfoDataCheckrWriteButtonInt_Click}" Margin="0,5,5,0"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="BLE Connect request" Click="{x:Bind BLEConnectRequestWriteButtonInt_Click}" Margin="0,5,5,0"/>
+                    <Button Content="Save Data Check" Click="{x:Bind SaveDataCheckButtonInt_Click}" Margin="0,5,5,0"/>
+                    <Button Content="Game Success Exit" Click="{x:Bind ExitCheckSuccessButtonInt_Click}" Margin="0,5,5,0"/>
+                </StackPanel>
+                
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="TBVictory" PlaceholderText="Victory: 77" Margin="0,5,5,0" Width="100" HorizontalAlignment="Left"/>
+                    <TextBox x:Name="TBDefeat" PlaceholderText="Defeat: 23" Margin="0,5,5,0" Width="100" HorizontalAlignment="Left"/>
+                    <Button Content="GameRecordsTransfer" Click="{x:Bind GameRecordsTransferWriteButtonInt_Click}" Margin="0,5,5,0"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="Find Band" Click="{x:Bind FindBandButtonInt_Click}" Margin="0,5,5,0"/>
+                    <Button Content="Stop Find Band" Click="{x:Bind StopFindBandButtonInt_Click}" Margin="0,5,5,0"/>
+                    <Button Content="Complete Find Mobile" Click="{x:Bind CompleteFindMobileButtonInt_Click}" Margin="0,5,5,0"/>
+                    <Button Content="Incoming Call" Click="{x:Bind IncomingCallBufferWriteButtonInt_Click}" Margin="0,5,5,0"/>
+                    <Button Content="Shortcut/Exit ScoreMode" Click="{x:Bind ShortCutBufferWriteButtonInt_Click}" Margin="0,5,5,0"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="App Message KR" Click="{x:Bind AppMessageKRWriteButtonInt_Click}" Margin="0,15,5,0"/>
+                    <Button Content="App Message EN" Click="{x:Bind AppMessageENWriteButtonInt_Click}" Margin="0,15,5,0"/>
+                    <Button Content="App Message Symbol" Click="{x:Bind AppMessageSymbolWriteButtonInt_Click}" Margin="0,15,5,0"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="AppMessageSubject" PlaceholderText="Subject limited 20bytes" Width ="200" Margin="0,5,5,0" HorizontalAlignment="Right"/>
+                    <Button Content="App Message Write" Click="{x:Bind AppMessageWriteButtonInt_Click}" Margin="0,5,5,0"/>
+                </StackPanel>
+                
+                <TextBox x:Name="AppMessageContents" PlaceholderText="Contents Enter text to send" TextWrapping="Wrap" MinHeight="62" Margin="0,5,5,0"/>                
+            </StackPanel> 
+            <TextBlock x:Name="CharacteristicLatestValue" Margin="0,10,0,0"/>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

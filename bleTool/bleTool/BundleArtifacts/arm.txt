@@ -1,0 +1,2 @@
+MainPackage=D:\GitLab\_WEKKUK_MASTER\tool\CS-bleTool\bleTool\bleTool\bin\ARM\Debug\bleTool_1.0.12.0_ARM_Debug.msix
+SymbolPackage=D:\GitLab\_WEKKUK_MASTER\tool\CS-bleTool\bleTool\bleTool\obj\ARM\Debug\Symbols\bleTool_1.0.12.0_ARM_Debug.appxsym
